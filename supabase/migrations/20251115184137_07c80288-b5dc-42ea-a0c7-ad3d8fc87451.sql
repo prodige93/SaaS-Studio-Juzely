@@ -35,10 +35,12 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Trigger qui se déclenche quand une étape est créée, modifiée ou supprimée
-CREATE TRIGGER trigger_update_project_progress
-  AFTER INSERT OR UPDATE OR DELETE ON project_steps
-  FOR EACH ROW
-  EXECUTE FUNCTION update_project_progress();
+-- (désactivé car la table project_steps n'existe pas encore
+--  dans le nouveau projet Supabase)
+-- CREATE TRIGGER trigger_update_project_progress
+--   AFTER INSERT OR UPDATE OR DELETE ON project_steps
+--   FOR EACH ROW
+--   EXECUTE FUNCTION update_project_progress();
 
 -- Mettre à jour automatiquement le statut du projet selon la progression
 CREATE OR REPLACE FUNCTION update_project_status_from_progress()

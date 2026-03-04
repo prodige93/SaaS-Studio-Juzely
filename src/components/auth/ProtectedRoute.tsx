@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Redirect to auth page when user logs out
     if (!loading && !user && location.pathname !== "/auth") {
       window.location.href = "/auth";
     }

@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [autoLoginTried, setAutoLoginTried] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -52,6 +53,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       subscription.unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    const defaultEmail = import.meta.env.VITE_DEFAULT_USER_EMAIL as string | undefined;
+    const defaultPassword = import.meta.env.VITE_DEFAULT_USER_PASSWORD as string | undefined;
+
+    const tryAutoLogin = async () => {
+      if (!defaultEmail || !defaultPassword) return;
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: defaultEmail,
+        password: defaultPassword,
+      });
+
+      if (error) {
+        toast({
+          title: "Erreur de connexion automatique",
+          description: "Impossible de connecter l'utilisateur par défaut.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    if (!session && !loading && !autoLoginTried) {
+      setAutoLoginTried(true);
+      tryAutoLogin();
+    }
+  }, [session, loading, autoLoginTried, toast]);
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({

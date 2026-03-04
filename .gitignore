@@ -1,0 +1,70 @@
+# =========================
+# Logs
+# =========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =========================
+# Dépendances & builds
+# =========================
+node_modules
+dist
+dist-ssr
+build
+.turbo
+.cache
+.parcel-cache
+
+# Vite / bundlers
+*.local
+.vite
+
+# Tests / couverture
+coverage
+.nyc_output
+jest-html-reporters-*
+
+# =========================
+# Environnements & secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# Supabase local
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+# =========================
+# OS / Editeurs
+# =========================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbs
+._*
+.Spotlight-V100
+.Trashes
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains / WebStorm
+.idea
+
+# Autres éditeurs
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
